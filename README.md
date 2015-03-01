@@ -1,6 +1,30 @@
-This is the repository for a dataset of motion capture sensor traces, annotated to indicate which exercise among a set of 12 possible exercises was performed at each timestep. 
+This repository holds a small annotated dataset of motion capture sensor traces from subjects performing simple exercises (jogging in place, boxing, arm circles, toe touches, etc.).
 
+Six sequences were collected from files available at mocap.cs.cmu.edu:
+* Subject 13: trials 29, 30, and 31
+* Subject 14: trials 6, 14, and 20
+
+These sequences were then post-processed as follows
+* A subset of 12 sensor channels were kept as representative of gross motor behavior. Remaining channels were discard.
+* Each column (sensor channel) was adjusted to have zero-mean.
+* Each column was block-averaged to a final frame rate of 10 fps (down from 120 fps in the raw data). 
+
+Exact matlab code to reproduce this post-processing is in preproc-code/.
+
+Each of the six sequences has been annotated to indicate which of a set of 12 possible exercises is being performed at each timestep. 
+
+Here's an example visualization of the data from subject 13, trial 30:
 ![Subject 13 trial 30](13_30_AnnotatedData.png)
+
+Each timestep consists of a 12-dimensional vector summarizing the positions and orientations of 12 body parts (see figure legend) during a 0.1 second interval. 
+
+The set of 12 possible exercise actions is listed below. Each letter A, B, C, ... in the figure indicates one of these behaviors.
+```
+    'JumpJack', 'Jog', 'Squat', 'KneeRaise', 'ArmCircle', ...
+    'Twist', 'SideReach', 'Box', 'UpDown', 'ToeTouchOneHand', ...
+    'SideBend', 'ToeTouchTwoHands' ...
+```
+
 
 Academic Citation
 -----
@@ -33,33 +57,6 @@ Description of fields stored in this file:
 %    each entry k is the name of the action referred to when TrueZ(t)==k
 % * ChannelNames : 1D cell array of strings
 %    each entry d is the name of the sensor for dimension d of X/Xprev
-```
-
-
-Dataset details
------
-Six sequences were collected from files available at mocap.cs.cmu.edu:
-* Subject 13: trials 29, 30, and 31
-* Subject 14: trials 6, 14, and 20
-
-These sequences were then post-processed as follows
-
-* A subset of 12 sensor channels were kept as representative of gross motor behavior. Remaining channels were discard.
-* Each column (sensor channel) was adjusted to have zero-mean.
-* Each column was block-averaged to a final frame rate of 10 fps (down from 120 fps in the raw data). 
-
-Exact matlab code to reproduce this post-processing is in preproc-code/.
-
-
-Annotation details
------
-
-Integer labels for each sequence, assigning each timestep (after post-processing) into one of 12 behavior categories indexed {1,2,...12} are found in the truelabels/ directory. The 12 action names are:
-
-```
-    'JumpJack', 'Jog', 'Squat', 'KneeRaise', 'ArmCircle', ...
-    'Twist', 'SideReach', 'Box', 'UpDown', 'ToeTouchOneHand', ...
-    'SideBend', 'ToeTouchTwoHands' ...
 ```
 
 Credits
