@@ -1,17 +1,17 @@
-This repository holds a small annotated dataset of motion capture sensor traces from subjects performing simple exercises (jogging in place, boxing, arm circles, toe touches, etc.).
+This repository holds a small annotated dataset of motion capture sensor traces from subjects performing simple exercises (jogging, arm circles, toe touches, etc.).
 
 Six sequences were collected from files available at mocap.cs.cmu.edu:
 * Subject 13: trials 29, 30, and 31
 * Subject 14: trials 6, 14, and 20
 
-These sequences were then post-processed as follows
-* A subset of 12 sensor channels were kept as representative of gross motor behavior. Remaining channels were discard.
-* Each column (sensor channel) was adjusted to have zero-mean.
-* Each column was block-averaged to a final frame rate of 10 fps (down from 120 fps in the raw data). 
-
-Exact matlab code to reproduce this post-processing is in preproc-code/.
-
 Each of the six sequences has been annotated to indicate which of a set of 12 possible exercises is being performed at each timestep. 
+
+The raw AMC data from these sequences was post-processed as follows:
+* 12 sensor channels were kept as representative of gross motor behavior. Remaining channels were discarded.
+* Each sensor channel was adjusted to have zero-mean.
+* Each channel was block-averaged to a final frame rate of 10 fps (down from 120 fps in the raw data). 
+
+Matlab code to perform this post-processing is in `preproc-code/`.
 
 Here's an example visualization of the data from subject 13, trial 30:
 ![Subject 13 trial 30](13_30_AnnotatedData.png)
